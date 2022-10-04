@@ -1,5 +1,53 @@
 <script>
 
+class GyroData {
+    constructor(targetElement) {
+        //this.height = height;
+        //this.lastEvent;
+        targetElement.addEventListener('click', onClick);
+    }
+
+    handleOrientation(event) {
+        console.log('jw: handling gyro data class');
+        // save reference to data object and dispatch event data
+        this.lastEvent = event;
+        dispatchEvent(event);
+    }
+
+    // initiate permission request for device gyro data access
+    onClick() {
+        try {
+            if (typeof DeviceMotionEvent.requestPermission === 'function') {
+                // iOS 13+ devices
+                DeviceMotionEvent.requestPermission()
+                .then((state) => {
+                    if (state === 'granted') {
+                        window.addEventListener('devicemotion', handleOrientation);
+                    } else {
+                        console.error('Request to access the orientation was rejected');
+                    }
+                })
+            } else {
+                // Non iOS 13+ devices
+                window.addEventListener('devicemotion', handleOrientation);
+            }
+        } catch (error) {
+            // Handle desktop browsers
+            console.error('DeviceMotion Events not supported in this browser');
+            let event = new Event("NoDeviceMotion", {bubbles: true});
+            dispatchEvent(event);
+        }
+    }
+    
+    // Getter
+    get lastEvent() {
+        return this.lastEvent;
+    }
+}
+
+
+
+/*
     function handleOrientation(event) {
         // jw: destructuring here>?
         const alpha = event.rotationRate.alpha;
@@ -23,12 +71,11 @@
                 DeviceMotionEvent.requestPermission()
                 .then((state) => {
                     if (state === 'granted') {
-                    window.addEventListener('devicemotion', handleOrientation);
+                        window.addEventListener('devicemotion', handleOrientation);
                     } else {
-                    console.error('Request to access the orientation was rejected');
+                        console.error('Request to access the orientation was rejected');
                     }
                 })
-                //.catch(console.error);// jw: is this needed?
             } else {
                 // Non iOS 13+ devices
                 window.addEventListener('devicemotion', handleOrientation);
@@ -36,16 +83,19 @@
         } catch (error) {
             // Handle desktop browsers
             console.error('DeviceMotion Events not supported in this browser');
-
             let event = new Event("NoDeviceMotion", {bubbles: true});
             dispatchEvent(event);
         }
     }
+*/
 
-    // Add the click handler for requesting access to the gyro data
     document.addEventListener('DOMContentLoaded', () => {
+        // Establish click handler for requesting access to the gyro data
         btn = document.getElementById('btn');
-        btn.addEventListener('click', onClick);
+        //btn.addEventListener('click', onClick);
+        const gyObj = new GyroData(btn);
+        // jw: listen to events now...
+
     });
 
     let btn;
