@@ -4,7 +4,7 @@ class GyroData {
     constructor(targetElement) {
         //this.height = height;
         //this.lastEvent;
-        targetElement.addEventListener('click', onClick);
+        targetElement.addEventListener('click', this.onClick);
     }
 
     handleOrientation(event) {
