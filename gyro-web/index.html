@@ -5,8 +5,14 @@ class GyroData {
         this.targetElement = targetElement;
         this.oHandler = orientationHandler;
         //this.lastEvent;
+
+
+        //.bind(this), false);
+
+
+
         targetElement.addEventListener('click', function(){
-            _oHandler = oHandler;
+            let _oHandler = this.oHandler;
             try {
                 if (typeof DeviceMotionEvent.requestPermission === 'function') {
                     // iOS 13+ devices
@@ -30,8 +36,10 @@ class GyroData {
                 let event = new Event("NoDeviceMotion", {bubbles: true});
                 dispatchEvent(event);
             }
-        });
+        }.bind(this), false);
     }
+
+    static displayName = "Point";
 
 
     handleOrientation(event) {
