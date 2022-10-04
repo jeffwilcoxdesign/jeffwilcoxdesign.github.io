@@ -6,6 +6,7 @@
         const alpha = event.alpha;
         const beta = event.beta;
         const gamma = event.gamma;
+        console.log(event)
         console.log(alpha, beta, gamma, '-----------');//TODO: //make this an event dispatcher
 
 
@@ -29,6 +30,7 @@
         }
     }
 
+    // Add the click handler for requesting access to the gyro data
     document.addEventListener('DOMContentLoaded', () => {
             btn = document.getElementById('btn');
             btn.addEventListener('click', onClick);
