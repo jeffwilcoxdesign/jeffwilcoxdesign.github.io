@@ -22,14 +22,14 @@ class GyroData {
                 DeviceMotionEvent.requestPermission()
                 .then((state) => {
                     if (state === 'granted') {
-                        window.addEventListener('devicemotion', handleOrientation);
+                        window.addEventListener('devicemotion', this.handleOrientation);
                     } else {
                         console.error('Request to access the orientation was rejected');
                     }
                 })
             } else {
                 // Non iOS 13+ devices
-                window.addEventListener('devicemotion', handleOrientation);
+                window.addEventListener('devicemotion', this.handleOrientation);
             }
         } catch (error) {
             // Handle desktop browsers
