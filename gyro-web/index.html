@@ -5,8 +5,34 @@ class GyroData {
         this.targetElement = targetElement;
         this.oHandler = orientationHandler;
         //this.lastEvent;
-        targetElement.addEventListener('click', this.onClick);
+        targetElement.addEventListener('click', function(){
+            _oHandler = oHandler;
+            try {
+                if (typeof DeviceMotionEvent.requestPermission === 'function') {
+                    // iOS 13+ devices
+                    DeviceMotionEvent.requestPermission()
+                    .then((state) => {
+                        if (state === 'granted') {
+                            console.log('this:',this)
+                            console.log('oHandler:',_oHandler)
+                            window.addEventListener('devicemotion', _oHandler);
+                        } else {
+                            console.error('Request to access the orientation was rejected');
+                        }
+                    })
+                } else {
+                    // Non iOS 13+ devices
+                    window.addEventListener('devicemotion', _oHandler);
+                }
+            } catch (error) {
+                // Handle desktop browsers
+                console.error('DeviceMotion Events not supported in this browser');
+                let event = new Event("NoDeviceMotion", {bubbles: true});
+                dispatchEvent(event);
+            }
+        });
     }
+
 
     handleOrientation(event) {
         console.log('jw: handling gyro data class');
