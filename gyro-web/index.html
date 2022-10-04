@@ -38,9 +38,9 @@
 
         // use GyroData instance for requesting gyro event data
         const gyObj = new GyroData(btn, dataHandler);
-        gyObj.addEventListener("NoDeviceMotion", function(){
+        btn.addEventListener("NoDeviceMotion", function(){
             displayDiv.textContent = "Sorry, no browser support?";
-        })
+        });
     });
 
     function dataHandler(event) {
