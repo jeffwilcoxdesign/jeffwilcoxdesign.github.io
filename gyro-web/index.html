@@ -1,157 +1,61 @@
 <script>
+    class GyroData {
+        constructor(targetElement, orientationHandler) {
+            this.targetElement = targetElement;
+            this.oHandler = orientationHandler;
 
-class GyroData {
-    constructor(targetElement, orientationHandler) {
-        this.targetElement = targetElement;
-        this.oHandler = orientationHandler;
-        //this.lastEvent;
-
-
-        //.bind(this), false);
-
-
-
-        targetElement.addEventListener('click', function(){
-            let _oHandler = this.oHandler;
-            try {
-                if (typeof DeviceMotionEvent.requestPermission === 'function') {
-                    // iOS 13+ devices
-                    DeviceMotionEvent.requestPermission()
-                    .then((state) => {
-                        if (state === 'granted') {
-                            console.log('this:',this)
-                            console.log('oHandler:',_oHandler)
-                            window.addEventListener('devicemotion', _oHandler);
-                        } else {
-                            console.error('Request to access the orientation was rejected');
-                        }
-                    })
-                } else {
-                    // Non iOS 13+ devices
-                    window.addEventListener('devicemotion', _oHandler);
-                }
-            } catch (error) {
-                // Handle desktop browsers
-                console.error('DeviceMotion Events not supported in this browser');
-                //let event = new Event("NoDeviceMotion", {bubbles: true});
-                //dispatchEvent(event);
-            }
-        }.bind(this), false);
-    }
-
-
-
-
-    // initiate permission request for device gyro data access
-    onClick() {
-        _oHandler = this.oHandler;
-        try {
-            if (typeof DeviceMotionEvent.requestPermission === 'function') {
-                // iOS 13+ devices
-                DeviceMotionEvent.requestPermission()
-                .then((state) => {
-                    if (state === 'granted') {
-                        console.log('this:',this)
-                        console.log('oHandler:',_oHandler)
+            targetElement.addEventListener('click', function(){
+                let _oHandler = this.oHandler;// jw: no longer needed?
+                // initiate permission request for device gyro data access
+                try {
+                    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+                        // iOS 13+ devices
+                        DeviceMotionEvent.requestPermission()
+                        .then((state) => {
+                            if (state === 'granted') {
+                                window.addEventListener('devicemotion', _oHandler);
+                            } else {
+                                console.error('Request to access the orientation was rejected');
+                            }
+                        })
+                    } else {
+                        // Non iOS 13+ devices
                         window.addEventListener('devicemotion', _oHandler);
-                    } else {
-                        console.error('Request to access the orientation was rejected');
                     }
-                })
-            } else {
-                // Non iOS 13+ devices
-                window.addEventListener('devicemotion', _oHandler);
-            }
-        } catch (error) {
-            // Handle desktop browsers
-            console.error('DeviceMotion Events not supported in this browser');
-            let event = new Event("NoDeviceMotion", {bubbles: true});
-            dispatchEvent(event);
+                } catch (error) {
+                    // Handle desktop browsers
+                    console.error('DeviceMotion Events not supported in this browser');
+                    let event = new Event("NoDeviceMotion", {bubbles: true});
+                    dispatchEvent(event);
+                }
+            }.bind(this), false);
         }
     }
-    
-    // Getter
-    get lastEvent() {
-        return this.lastEvent;
-    }
-}
-
-
-
-/*
-    function handleOrientation(event) {
-        // jw: destructuring here>?
-        const alpha = event.rotationRate.alpha;
-        const beta = event.rotationRate.beta;
-        const gamma = event.rotationRate.gamma;
-        console.log(event);
-        //console.log(alpha, beta, gamma, '-----------');//TODO: //make this an event dispatcher
-        btn.textContent = alpha+', '+beta+', '+gamma;
-
-
-        // jw: let's just dispatch when running within class..
-        dispatchEvent(event);
-
-
-    }
-
-    function onClick() {
-        try {
-            if (typeof DeviceMotionEvent.requestPermission === 'function') {
-                // iOS 13+ devices
-                DeviceMotionEvent.requestPermission()
-                .then((state) => {
-                    if (state === 'granted') {
-                        window.addEventListener('devicemotion', handleOrientation);
-                    } else {
-                        console.error('Request to access the orientation was rejected');
-                    }
-                })
-            } else {
-                // Non iOS 13+ devices
-                window.addEventListener('devicemotion', handleOrientation);
-            }
-        } catch (error) {
-            // Handle desktop browsers
-            console.error('DeviceMotion Events not supported in this browser');
-            let event = new Event("NoDeviceMotion", {bubbles: true});
-            dispatchEvent(event);
-        }
-    }
-*/
 
     document.addEventListener('DOMContentLoaded', () => {
-        // Establish click handler for requesting access to the gyro data
+        // define a target DOM element for user to tap
         btn = document.getElementById('btn');
-        //btn.addEventListener('click', onClick);
-        const gyObj = new GyroData(btn, handleOrientation);
-        // jw: listen to events now...
+        displayDiv = document.getElementById('display');
 
+        // use GyroData instance for requesting gyro event data within handleOrientation
+        const gyObj = new GyroData(btn, handleOrientation);
     });
 
     function handleOrientation(event) {
-        // jw: destructuring here>?
+        // jw: need to desctructure this ?
         const alpha = event.rotationRate.alpha;
         const beta = event.rotationRate.beta;
         const gamma = event.rotationRate.gamma;
         console.log(event);
-        //console.log(alpha, beta, gamma, '-----------');//TODO: //make this an event dispatcher
-        btn.textContent = alpha+', '+beta+', '+gamma;
 
-
-        // jw: let's just dispatch when running within class..
-        //dispatchEvent(event);
-
-
+        displayDiv.textContent = alpha+', '+beta+', '+gamma;
     }
 
+    let displayDiv;
     let btn;
 
 </script>
-<button id='btn' style="
-    background-color:cornflowerblue; 
-    width:100%; 
-    height:100%;
-    font-size:30px">
-    Let's monitor that gyro data
+<div id='display'>no data yet</div>
+<button id='btn' style="background-color:cornflowerblue; border-radius: 20px; width:100%; font-size:40px">
+    Start monitoring gyro
 </button>
