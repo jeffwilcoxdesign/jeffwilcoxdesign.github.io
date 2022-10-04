@@ -40,12 +40,7 @@ class GyroData {
     }
 
 
-    handleOrientation(event) {
-        console.log('jw: handling gyro data class');
-        // save reference to data object and dispatch event data
-        this.lastEvent = event;
-        //dispatchEvent(event);
-    }
+
 
     // initiate permission request for device gyro data access
     onClick() {
@@ -145,7 +140,7 @@ class GyroData {
 
 
         // jw: let's just dispatch when running within class..
-        dispatchEvent(event);
+        //dispatchEvent(event);
 
 
     }
