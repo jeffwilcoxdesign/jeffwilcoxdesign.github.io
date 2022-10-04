@@ -1,6 +1,4 @@
 <script>
-    //alert('hello jeff');
-    //window.addEventListener('deviceorientation', handleOrientation);// this is going to fail ;-(
 
     function handleOrientation(event) {
         // jw: destructuring here>?
@@ -12,34 +10,45 @@
         btn.textContent = alpha+', '+beta+', '+gamma;
 
 
+        // jw: let's just dispatch when running within class..
+        dispatchEvent(event);
+
 
     }
 
     function onClick() {
-        if (typeof DeviceMotionEvent.requestPermission === 'function') {
-            // Handle iOS 13+ devices.
-            DeviceMotionEvent.requestPermission()
-            .then((state) => {
-                if (state === 'granted') {
+        try {
+            if (typeof DeviceMotionEvent.requestPermission === 'function') {
+                // iOS 13+ devices
+                DeviceMotionEvent.requestPermission()
+                .then((state) => {
+                    if (state === 'granted') {
+                    window.addEventListener('devicemotion', handleOrientation);
+                    } else {
+                    console.error('Request to access the orientation was rejected');
+                    }
+                })
+                //.catch(console.error);// jw: is this needed?
+            } else {
+                // Non iOS 13+ devices
                 window.addEventListener('devicemotion', handleOrientation);
-                } else {
-                console.error('Request to access the orientation was rejected');
-                }
-            })
-            .catch(console.error);
-        } else {
-            // Handle regular non iOS 13+ devices.
-            window.addEventListener('devicemotion', handleOrientation);
+            }
+        } catch (error) {
+            // Handle desktop browsers
+            console.error('DeviceMotion Events not supported in this browser');
+
+            let event = new Event("NoDeviceMotion", {bubbles: true});
+            dispatchEvent(event);
         }
     }
 
     // Add the click handler for requesting access to the gyro data
     document.addEventListener('DOMContentLoaded', () => {
-            btn = document.getElementById('btn');
-            btn.addEventListener('click', onClick);
-        });
+        btn = document.getElementById('btn');
+        btn.addEventListener('click', onClick);
+    });
 
-        let btn;
+    let btn;
 
 </script>
 <button id='btn' style="
