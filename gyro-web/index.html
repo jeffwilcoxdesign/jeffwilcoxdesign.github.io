@@ -1,0 +1,46 @@
+<script>
+    //alert('hello jeff');
+    //window.addEventListener('deviceorientation', handleOrientation);// this is going to fail ;-(
+
+    function handleOrientation(event) {
+        const alpha = event.alpha;
+        const beta = event.beta;
+        const gamma = event.gamma;
+        console.log(alpha, beta, gamma, '-----------');//TODO: //make this an event dispatcher
+
+
+    }
+
+    function onClick() {
+        if (typeof DeviceMotionEvent.requestPermission === 'function') {
+            // Handle iOS 13+ devices.
+            DeviceMotionEvent.requestPermission()
+            .then((state) => {
+                if (state === 'granted') {
+                window.addEventListener('devicemotion', handleOrientation);
+                } else {
+                console.error('Request to access the orientation was rejected');
+                }
+            })
+            .catch(console.error);
+        } else {
+            // Handle regular non iOS 13+ devices.
+            window.addEventListener('devicemotion', handleOrientation);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+            btn = document.getElementById('btn');
+            btn.addEventListener('click', onClick);
+        });
+
+        let btn;
+
+</script>
+<button id='btn' style="
+    background-color:cornflowerblue; 
+    width:100%; 
+    height:100%;
+    font-size:30px">
+    Let's monitor that gyro data
+</button>
