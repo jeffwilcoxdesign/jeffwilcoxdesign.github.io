@@ -1,8 +1,9 @@
 <script>
 
 class GyroData {
-    constructor(targetElement) {
+    constructor(targetElement, orientationHandler) {
         this.targetElement = targetElement;
+        this.oHandler = orientationHandler;
         //this.lastEvent;
         targetElement.addEventListener('click', this.onClick);
     }
@@ -22,14 +23,15 @@ class GyroData {
                 DeviceMotionEvent.requestPermission()
                 .then((state) => {
                     if (state === 'granted') {
-                        window.addEventListener('devicemotion', this.handleOrientation);
+                        console.log('this:',this)
+                        window.addEventListener('devicemotion', this.oHandler);
                     } else {
                         console.error('Request to access the orientation was rejected');
                     }
                 })
             } else {
                 // Non iOS 13+ devices
-                window.addEventListener('devicemotion', this.handleOrientation);
+                window.addEventListener('devicemotion', this.oHandler);
             }
         } catch (error) {
             // Handle desktop browsers
@@ -93,10 +95,26 @@ class GyroData {
         // Establish click handler for requesting access to the gyro data
         btn = document.getElementById('btn');
         //btn.addEventListener('click', onClick);
-        const gyObj = new GyroData(btn);
+        const gyObj = new GyroData(btn, handleOrientation);
         // jw: listen to events now...
 
     });
+
+    function handleOrientation(event) {
+        // jw: destructuring here>?
+        const alpha = event.rotationRate.alpha;
+        const beta = event.rotationRate.beta;
+        const gamma = event.rotationRate.gamma;
+        console.log(event);
+        //console.log(alpha, beta, gamma, '-----------');//TODO: //make this an event dispatcher
+        btn.textContent = alpha+', '+beta+', '+gamma;
+
+
+        // jw: let's just dispatch when running within class..
+        dispatchEvent(event);
+
+
+    }
 
     let btn;
 
