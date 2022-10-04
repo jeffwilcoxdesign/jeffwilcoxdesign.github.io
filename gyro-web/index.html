@@ -5,7 +5,6 @@
             this.oHandler = orientationHandler;
 
             targetElement.addEventListener('click', function(){
-                let _oHandler = this.oHandler;// jw: no longer needed?
                 // initiate permission request for device gyro data access
                 try {
                     if (typeof DeviceMotionEvent.requestPermission === 'function') {
@@ -13,14 +12,14 @@
                         DeviceMotionEvent.requestPermission()
                         .then((state) => {
                             if (state === 'granted') {
-                                window.addEventListener('devicemotion', _oHandler);
+                                window.addEventListener('devicemotion', this.oHandler);
                             } else {
                                 console.error('Request to access the orientation was rejected');
                             }
                         })
                     } else {
                         // Non iOS 13+ devices
-                        window.addEventListener('devicemotion', _oHandler);
+                        window.addEventListener('devicemotion', this.oHandler);
                     }
                 } catch (error) {
                     // Handle desktop browsers
@@ -37,25 +36,29 @@
         btn = document.getElementById('btn');
         displayDiv = document.getElementById('display');
 
-        // use GyroData instance for requesting gyro event data within handleOrientation
-        const gyObj = new GyroData(btn, handleOrientation);
+        // use GyroData instance for requesting gyro event data
+        const gyObj = new GyroData(btn, dataHandler);
+        gyObj.addEventListener("NoDeviceMotion", function(){
+            displayDiv.textContent = "Sorry, no browser support?";
+        })
     });
 
-    function handleOrientation(event) {
-        // jw: need to desctructure this ?
-        const alpha = event.rotationRate.alpha;
-        const beta = event.rotationRate.beta;
-        const gamma = event.rotationRate.gamma;
-        console.log(event);
-
+    function dataHandler(event) {
+        const { alpha, beta, gamma } = event.rotationRate;
         displayDiv.textContent = alpha+', '+beta+', '+gamma;
     }
 
+    // set DOM references
     let displayDiv;
     let btn;
 
 </script>
+<style>
+    body {
+        font-size: 60px;
+    }
+</style>
 <div id='display'>no data yet</div>
-<button id='btn' style="background-color:cornflowerblue; border-radius: 20px; width:100%; font-size:40px">
+<button id='btn' style="background-color:lightcoral; border-radius: 20px; width:100%;">
     Start monitoring gyro
 </button>
