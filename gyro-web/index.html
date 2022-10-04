@@ -2,7 +2,7 @@
 
 class GyroData {
     constructor(targetElement) {
-        //this.height = height;
+        this.targetElement = targetElement;
         //this.lastEvent;
         targetElement.addEventListener('click', this.onClick);
     }
