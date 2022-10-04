@@ -17,6 +17,7 @@ class GyroData {
 
     // initiate permission request for device gyro data access
     onClick() {
+        _oHandler = oHandler;
         try {
             if (typeof DeviceMotionEvent.requestPermission === 'function') {
                 // iOS 13+ devices
@@ -24,15 +25,15 @@ class GyroData {
                 .then((state) => {
                     if (state === 'granted') {
                         console.log('this:',this)
-                        console.log('oHandler:',oHandler)
-                        window.addEventListener('devicemotion', oHandler);
+                        console.log('oHandler:',_oHandler)
+                        window.addEventListener('devicemotion', _oHandler);
                     } else {
                         console.error('Request to access the orientation was rejected');
                     }
                 })
             } else {
                 // Non iOS 13+ devices
-                window.addEventListener('devicemotion', oHandler);
+                window.addEventListener('devicemotion', _oHandler);
             }
         } catch (error) {
             // Handle desktop browsers
