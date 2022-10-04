@@ -4,7 +4,7 @@
             this.targetElement = targetElement;
             this.oHandler = orientationHandler;
 
-            targetElement.addEventListener('click', function(){
+            targetElement.addEventListener('click', function() {
                 // initiate permission request for device gyro data access
                 try {
                     if (typeof DeviceMotionEvent.requestPermission === 'function') {
@@ -16,31 +16,26 @@
                             } else {
                                 console.error('Request to access the orientation was rejected');
                             }
-                        })
+                        });
                     } else {
                         // Non iOS 13+ devices
                         window.addEventListener('devicemotion', this.oHandler);
                     }
                 } catch (error) {
-                    // Handle desktop browsers
+                    // Show message for desktop browsers
                     console.error('DeviceMotion Events not supported in this browser');
-                    let event = new Event("NoDeviceMotion", {bubbles: true});
-                    dispatchEvent(event);
                 }
             }.bind(this), false);
         }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', function() {
         // define a target DOM element for user to tap
         btn = document.getElementById('btn');
         displayDiv = document.getElementById('display');
 
         // use GyroData instance for requesting gyro event data
         const gyObj = new GyroData(btn, dataHandler);
-        btn.addEventListener("NoDeviceMotion", function(){
-            displayDiv.textContent = "Sorry, no browser support?";
-        });
     });
 
     function dataHandler(event) {
