@@ -3,11 +3,13 @@
     //window.addEventListener('deviceorientation', handleOrientation);// this is going to fail ;-(
 
     function handleOrientation(event) {
-        const alpha = event.alpha;
-        const beta = event.beta;
-        const gamma = event.gamma;
-        console.log(event)
-        console.log(alpha, beta, gamma, '-----------');//TODO: //make this an event dispatcher
+        const alpha = event.rotationRate.alpha;
+        const beta = event.rotationRate.beta;
+        const gamma = event.rotationRate.gamma;
+        console.log(event);
+        //console.log(alpha, beta, gamma, '-----------');//TODO: //make this an event dispatcher
+
+
 
 
     }
