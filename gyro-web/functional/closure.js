@@ -1,5 +1,4 @@
 function setupGyro(targetElement, dataHandler){
-    console.log('hello setupGyro');
     return targetElement.addEventListener('click', () => {
         try {
             if (typeof DeviceMotionEvent.requestPermission === 'function') {
@@ -11,7 +10,7 @@ function setupGyro(targetElement, dataHandler){
                     } else {
                         console.error('Request to access the orientation was rejected');
                     }
-                })
+                });
             } else {
                 // Non iOS 13+ devices
                 window.addEventListener('devicemotion', dataHandler);
@@ -22,5 +21,4 @@ function setupGyro(targetElement, dataHandler){
         }
     });
 }
-export default setupGyro;
 export { setupGyro };
