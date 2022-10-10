@@ -1,7 +1,7 @@
 // ✅ Works
 export class setupGyro {
     constructor(targetElement, dataHandler) {
-        this.oHandler = orientationHandler;
+        this.oHandler = dataHandler;
 
         targetElement.addEventListener('click', function() {
             // initiate permission request for device gyro data access after user tap
