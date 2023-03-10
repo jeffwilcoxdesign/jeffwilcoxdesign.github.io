@@ -862,7 +862,7 @@ Website: http://emilcarlsson.se/
 				</li>
         <li class="replies">
           <img src="chat_assets/mopo_logo.jpeg" alt="" />
-          <p>Try asking, "My family are coming to Tahoe next weekend. We have kids age 8 and 10. We want to play in the snow. What do you recommend?"<button type="button" class="btn btn-primary" style="margin-top: 8px; display: block;">Ask This Question</button></p>
+          <p>Try asking, "My family are coming to Tahoe next weekend. We have kids age 8 and 10. We want to play in the snow. What do you recommend?"<button id="try_me_1" type="button" class="btn btn-primary" style="margin-top: 8px; display: block;">Ask This Question</button></p>
         </li>
 				<!--
         <li class="sent">
@@ -901,7 +901,13 @@ Website: http://emilcarlsson.se/
 <iframe src="https://visitlaketahoe.com/travel/plan-my-visit/?gclid=Cj0KCQiApKagBhC1ARIsAFc7Mc7zgMZ6A6UqS6Lw-1l2-4z-ZLAalWi84QIZzEl70iLwwaK6_4PxOj4aAuZjEALw_wcB" style="height: 100%;width: 100%;top: 0;left: 0;position: absolute;" title="Visit Lake Tahoe Example"></iframe>
 
 <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-<script >$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+<script >
+  $("#try_me_1").on('click', function(event) {
+    event.preventDefault(); // To prevent following the link (optional)
+    alert("hello jeff");
+  });
+
+  $(".messages").animate({ scrollTop: $(document).height() }, "fast");
 
 $("#profile-img").click(function() {
 	$("#status-options").toggleClass("active");
