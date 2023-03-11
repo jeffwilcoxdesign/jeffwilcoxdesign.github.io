@@ -517,7 +517,7 @@
 }
 #frame .content {
   float: right;
-  width: 60%;
+  width: 100%;
   height: 100%;
   overflow: hidden;
   position: relative;
@@ -688,161 +688,17 @@
 #frame .content .message-input .wrap button:focus {
   outline: none;
 }
+
+.list-group {
+  float: right;
+  display: block;
+  width: 60%;
+}
+
 </style></head><body>
-<!-- 
-
-A concept for a chat interface. 
-
-Try writing a new message! :)
-
-
-Follow me here:
-Twitter: https://twitter.com/thatguyemil
-Codepen: https://codepen.io/emilcarlsson/
-Website: http://emilcarlsson.se/
-
--->
 
 <div id="frame">
-  <!--
-	<div id="sidepanel">
-		<div id="profile">
-			<div class="wrap">
-				<img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
-				<p>Mike Ross</p>
-				<i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
-				<div id="status-options">
-					<ul>
-						<li id="status-online" class="active"><span class="status-circle"></span> <p>Online</p></li>
-						<li id="status-away"><span class="status-circle"></span> <p>Away</p></li>
-						<li id="status-busy"><span class="status-circle"></span> <p>Busy</p></li>
-						<li id="status-offline"><span class="status-circle"></span> <p>Offline</p></li>
-					</ul>
-				</div>
-				<div id="expanded">
-					<label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
-					<input name="twitter" type="text" value="mikeross" />
-					<label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
-					<input name="twitter" type="text" value="ross81" />
-					<label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
-					<input name="twitter" type="text" value="mike.ross" />
-				</div>
-			</div>
-		</div>
-		<div id="search">
-			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input type="text" placeholder="Search contacts..." />
-		</div>
-		<div id="contacts">
-			<ul>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status online"></span>
-						<img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
-						<div class="meta">
-							<p class="name">Louis Litt</p>
-							<p class="preview">You just got LITT up, Mike.</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact active">
-					<div class="wrap">
-						<span class="contact-status busy"></span>
-						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-						<div class="meta">
-							<p class="name">Harvey Specter</p>
-							<p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status away"></span>
-						<img src="http://emilcarlsson.se/assets/rachelzane.png" alt="" />
-						<div class="meta">
-							<p class="name">Rachel Zane</p>
-							<p class="preview">I was thinking that we could have chicken tonight, sounds good?</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status online"></span>
-						<img src="http://emilcarlsson.se/assets/donnapaulsen.png" alt="" />
-						<div class="meta">
-							<p class="name">Donna Paulsen</p>
-							<p class="preview">Mike, I know everything! I'm Donna..</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status busy"></span>
-						<img src="http://emilcarlsson.se/assets/jessicapearson.png" alt="" />
-						<div class="meta">
-							<p class="name">Jessica Pearson</p>
-							<p class="preview">Have you finished the draft on the Hinsenburg deal?</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status"></span>
-						<img src="http://emilcarlsson.se/assets/haroldgunderson.png" alt="" />
-						<div class="meta">
-							<p class="name">Harold Gunderson</p>
-							<p class="preview">Thanks Mike! :)</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status"></span>
-						<img src="http://emilcarlsson.se/assets/danielhardman.png" alt="" />
-						<div class="meta">
-							<p class="name">Daniel Hardman</p>
-							<p class="preview">We'll meet again, Mike. Tell Jessica I said 'Hi'.</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status busy"></span>
-						<img src="http://emilcarlsson.se/assets/katrinabennett.png" alt="" />
-						<div class="meta">
-							<p class="name">Katrina Bennett</p>
-							<p class="preview">I've sent you the files for the Garrett trial.</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status"></span>
-						<img src="http://emilcarlsson.se/assets/charlesforstman.png" alt="" />
-						<div class="meta">
-							<p class="name">Charles Forstman</p>
-							<p class="preview">Mike, this isn't over.</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status"></span>
-						<img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-						<div class="meta">
-							<p class="name">Jonathan Sidwell</p>
-							<p class="preview"><span>You:</span> That's bullshit. This deal is solid.</p>
-						</div>
-					</div>
-				</li>
-			</ul>
-		</div>
-		<div id="bottom-bar">
-			<button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
-			<button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
-		</div>
-	</div>
--->
+
 	<div class="content">
 		<div class="contact-profile">
 			<img src="chat_assets/mopo_logo.jpeg" alt="" />
@@ -858,7 +714,7 @@ Website: http://emilcarlsson.se/
 			<ul>
 				<li class="replies">
 					<img src="chat_assets/mopo_logo.jpeg" alt="" />
-					<p>Hello and welcome!  I'm your conversational guide for questions about travel, resturants, or other topics of interest.  Let me know how I can help.</p>
+					<p>Hello and welcome!  I'm your conversational guide for questions about travel, resturants, or other topics of interest at Visit Lake Tahoe.  Let me know how I can help.</p>
 				</li>
         <li class="replies">
           <img src="chat_assets/mopo_logo.jpeg" alt="" />
@@ -902,9 +758,64 @@ Website: http://emilcarlsson.se/
 
 <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
 <script >
+  var animationSpeeds = {
+  'tada': 1000,
+  'tadaSmall': 1000,
+  'flash': 500,
+  'shake': 400,
+  'pulseUp': 250,
+  'pulseDown': 250,
+  'popIn': 250,
+  'popOut': 250,
+  'fadeIn': 200,
+  'fadeOut': 200
+};
+
+  function animateEl(element, animation, complete)
+  {
+    if (!element instanceof jQuery || !$(element).length || !animation) return null;
+    
+    if (element.data('animating')) {
+      element.removeClass(element.data('animating')).data('animating', null);
+      element.data('animationTimeout') && clearTimeout(element.data('animationTimeout'));
+    }
+    
+    element.addClass('animated-' + animation).data('animating', 'animated-' + animation);
+    element.data('animationTimeout', setTimeout((function() { element.removeClass(element.data('animating')).data('animating', null); complete && complete(); }), animationSpeeds[animation]));
+  }
+
+
   $("#try_me_1").on('click', function(event) {
-    event.preventDefault(); // To prevent following the link (optional)
-    alert("hello jeff");
+    event.preventDefault(); // To prevent following the link
+    message = "My family are coming to Tahoe next weekend. We have kids age 8 and 10. We want to play in the snow. What do you recommend?";
+    $('<li id="try_me_response_1" class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+    $('.message-input input').val(null);
+    $('.contact.active .preview').html('<span>You: </span>' + message);
+    $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+/*
+    $("try_me_response_1").animate({width: '250%', height: '250%'});
+    animateEl($("try_me_response_1"), 'tada')
+*/  
+    setTimeout(function(e){
+        message = "Searching for: Tahoe kids snow activities";
+        $('<li id="try_me_response_1" class="replies"><img src="chat_assets/mopo_logo.jpeg" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+        $('.message-input input').val(null);
+        $('.contact.active .preview').html('<span>You: </span>' + message);
+        $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+    }, 500);
+    
+    setTimeout(function(e){
+        message = '<p>Lake Tahoe is a beautiful area with plenty of opportunities for families to enjoy the snow! Here are a few suggestions for fun activities with kids aged 8 and 10: <br/> - Skiing and snowboarding: Lake Tahoe is known for its world-class ski resorts, such as Heavenly, Northstar, and Squaw Valley. Many of these resorts offer lessons and programs for kids, so be sure to check out their websites for more information [...]</p><ul class="list-group list-group-light"><li  class="list-group-item"><img rel="icon" type="image/png" sizes="32x32" style="float: left; width:32px; height:32px;" src="https://visitlaketahoe.com/favicon-32x32.png">An item</li><li class="list-group-item">A second item</li><li class="list-group-item">A third item</li></ul>';
+        $('<li id="try_me_response_1_1" class="replies"><img src="chat_assets/mopo_logo.jpeg" alt="" />' + message + '</li>').appendTo($('.messages ul'));
+        $('.message-input input').val(null);
+        $('.contact.active .preview').html('<span>You: </span>' + message);
+        $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+
+        /////
+
+
+    }, 1500);
+
   });
 
   $(".messages").animate({ scrollTop: $(document).height() }, "fast");
@@ -946,10 +857,24 @@ function newMessage() {
 	if($.trim(message) == '') {
 		return false;
 	}
+
+
 	$('<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
 	$('.message-input input').val(null);
 	$('.contact.active .preview').html('<span>You: </span>' + message);
 	$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+
+  // check for a specific input here...
+  if(message.includes("snowboard lessons")){
+    setTimeout(function(e){
+        message = "Searching for: Tahoe kids snowboard lessons";
+        $('<li id="try_me_response_1" class="replies"><img src="chat_assets/mopo_logo.jpeg" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+        $('.message-input input').val(null);
+        $('.contact.active .preview').html('<span>You: </span>' + message);
+        $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+    }, 500);
+  }
+
 };
 
 $('.submit').click(function() {
@@ -962,6 +887,16 @@ $(window).on('keydown', function(e) {
     return false;
   }
 });
+
+$(".message-input input").focus(function(e){
+  e.preventDefault();
+  $(".message-input input").val('Where can my kids get snowboard lessons?');
+  setTimeout(function(e){
+    $(".message-input input").select();
+  }, 10);
+});
+
+
 //# sourceURL=pen.js
 </script>
 </body></html>
