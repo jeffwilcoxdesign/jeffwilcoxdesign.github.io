@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/SeeFarAway/static/css/main.1dfed9e9.css",
+    "main.js": "/SeeFarAway/static/js/main.fadebf50.js",
+    "static/js/377.3b694a68.chunk.js": "/SeeFarAway/static/js/377.3b694a68.chunk.js",
+    "static/media/compass_design_2.png": "/SeeFarAway/static/media/compass_design_2.4cc0261fd45248aa77ca.png",
+    "service-worker.js": "/SeeFarAway/service-worker.js",
+    "static/media/circle_big.png": "/SeeFarAway/static/media/circle_big.fa16d0f292e46edc5d46.png",
+    "static/media/arrow_marker.png": "/SeeFarAway/static/media/arrow_marker.c9da9ad230796b567a22.png",
+    "static/media/logo.svg": "/SeeFarAway/static/media/logo.103b5fa18196d5665a7e12318285c916.svg",
+    "index.html": "/SeeFarAway/index.html",
+    "main.1dfed9e9.css.map": "/SeeFarAway/static/css/main.1dfed9e9.css.map",
+    "main.fadebf50.js.map": "/SeeFarAway/static/js/main.fadebf50.js.map",
+    "377.3b694a68.chunk.js.map": "/SeeFarAway/static/js/377.3b694a68.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1dfed9e9.css",
+    "static/js/main.fadebf50.js"
+  ]
+}
